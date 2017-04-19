@@ -2,6 +2,8 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 TaskManager1.db
+.idea/misc.xml
+.idea/TaskManager.iml
 
 # User-specific stuff:
 .idea/**/workspace.xml
