@@ -76,13 +76,14 @@ db.bind('sqlite', 'TaskManager.db', create_db=True)
 db.generate_mapping(create_tables=True)
 
 
-# region UserDb
+# region UserDB
 @db_session
-def addUser(login, pass_hash, salt):
+def addUser(login, pass_hash, salt, email, phone, name):
     User(Login=login, PassHash=pass_hash, Salt=salt)
     commit()
     id = select(r for r in User if r.Login == login).first().Id
-    UserInfo(UserId=id)
+    UserInfo(UserId=id, Email=email, Phone=phone, Name=name)
+    commit()
 
 
 @db_session
@@ -92,19 +93,8 @@ def addUserUrl(id, comment, url):
 
 
 @db_session
-def updateUserInfo(id, email, phone, name):
-    if email is not None:
-        select(r for r in UserInfo if r.UserId == id).first().Email = email
-    if phone is not None:
-        select(r for r in UserInfo if r.UserId == id).first().Phone = phone
-    if name is not None:
-        select(r for r in UserInfo if r.UserId == id).first().Name = name
-    commit()
-
-
-@db_session
 def getAllUser():
-    return select(r for r in User)
+    return User.get()
 
 
 @db_session
@@ -119,12 +109,29 @@ def getUserInfo(id):
 
 @db_session
 def getUserUrl(id):
-    return select(r for r in UserInfo if r.UserId == id)
+    return select(r for r in UserInfo if r.UserId == id).get()
 
 
 @db_session
 def deleteUserUrl(id):
     delete(r for r in UserUrl if r.Id == id)
+    commit()
+
+
+# endregion
+
+
+# region ProjectDB
+@db_session
+def addProject(userId, name, url, status, expected):
+    p = Project(UserId=userId, ProjectName=name, URL=url)
+    if status is not None:
+        p.Status = status
+    if expected is not None:
+        p.ExpectedDate = expected
+    commit()
+    id = p.Id
+    ParticipantsProject(UserId=userId, ProjectId=id)
     commit()
 
 # endregion

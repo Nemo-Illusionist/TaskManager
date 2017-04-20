@@ -19,6 +19,6 @@ def structure():
     return render_template('structure.html')
 
 
-
 if __name__ == '__main__':
+    app.config['SERVER_NAME'] = "127.0.0.1:5000"
     app.run()
