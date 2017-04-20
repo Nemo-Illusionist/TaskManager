@@ -83,12 +83,23 @@ def addUser(login, pass_hash, salt):
     commit()
     id = select(r for r in User if r.Login == login).first().Id
     UserInfo(UserId=id)
+
+
+@db_session
+def addUserUrl(id, comment, url):
+    UserUrl(UserId=id, Comment=comment, Url=url)
     commit()
 
 
 @db_session
-def addUserUrl():
-    return
+def updateUserInfo(id, email, phone, name):
+    if email is not None:
+        select(r for r in UserInfo if r.UserId == id).first().Email = email
+    if phone is not None:
+        select(r for r in UserInfo if r.UserId == id).first().Phone = phone
+    if name is not None:
+        select(r for r in UserInfo if r.UserId == id).first().Name = name
+    commit()
 
 
 @db_session
@@ -112,9 +123,8 @@ def getUserUrl(id):
 
 
 @db_session
-def deleteUser(id):
-    delete(p for p in User if p.Id == id)
-    delete(r for r in UserInfo if r.UserId == id)
-    delete(r for r in UserUrl if r.UserId == id)
+def deleteUserUrl(id):
+    delete(r for r in UserUrl if r.Id == id)
     commit()
+
 # endregion
