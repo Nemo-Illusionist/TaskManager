@@ -87,6 +87,34 @@ def addUser(login, pass_hash, salt):
 
 
 @db_session
+def addUserUrl():
+    return
+
+
+@db_session
+def getAllUser():
+    return select(r for r in User)
+
+
+@db_session
+def getUser(login):
+    return select(r for r in User if r.Login == login).first()
+
+
+@db_session
 def getUserInfo(id):
     return select(r for r in UserInfo if r.UserId == id).first()
+
+
+@db_session
+def getUserUrl(id):
+    return select(r for r in UserInfo if r.UserId == id)
+
+
+@db_session
+def deleteUser(id):
+    delete(p for p in User if p.Id == id)
+    delete(r for r in UserInfo if r.UserId == id)
+    delete(r for r in UserUrl if r.UserId == id)
+    commit()
 # endregion
