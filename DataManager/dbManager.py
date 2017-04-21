@@ -123,7 +123,7 @@ def deleteUserUrl(id):
 
 # region ProjectDB
 @db_session
-def addProject(userId, name, url, status, expected):
+def addProject(userId, name, url, status, expected, info):
     p = Project(UserId=userId, ProjectName=name, URL=url)
     if status is not None:
         p.Status = status
@@ -131,7 +131,13 @@ def addProject(userId, name, url, status, expected):
         p.ExpectedDate = expected
     commit()
     id = p.Id
+    if info is not None:
+        ProjectInfo(ProjectId=id, Text=info)
     ParticipantsProject(UserId=userId, ProjectId=id)
     commit()
 
+
+@db_session
+def getProject(userId):
+    return select(r for r in ParticipantsProject if r.UserId == userId).get()
 # endregion
