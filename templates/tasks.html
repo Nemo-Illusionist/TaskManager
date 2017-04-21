@@ -4,8 +4,8 @@
         <div class="inner">
             <h3 class="masthead-brand">Планировщик заданий</h3>
             <nav class="nav nav-masthead">
-                <a class="nav-link active" href="/">Домой</a>
-                <a class="nav-link" href="/structure">Куда-то еще</a>
+                <a class="nav-link" href="/projects">Мои проекты</a>
+                <a class="nav-link active" href="/tasks">Задачи</a>
                 <a class="nav-link" href="#">Помощь</a>
             </nav>
         </div>
@@ -18,13 +18,23 @@
             <th style="width: 165px;">Ожидаемая дата</th>
             <th style="width: 50px;">Приоритет</th>
             <th style="width: 50px;">Статус</th>
-            <th style="width: 50px;">Ред.</th>
+            <th style="width: 80px;"><span class="glyphicon glyphicon-cog"></span></th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td><a href="/structure">Includes a modal-backdrop element. Alternatively, specify static for a backdrop which
-                doesn't close the modal on click.</a>
+            <td>
+                <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Link with href
+                <div class="collapse" id="collapseExample">
+                    <hr>
+                    <div class="card-text card-outline-primary mb-3">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                        proident.
+                    </div>
+                </div>
+                </a>
             </td>
             <td>backdrop</td>
             <td>Apr 25, 2017</td>
@@ -37,7 +47,8 @@
                 </div>
             </td>
             <td><code class="alert-info">В&nbsp;процессе</code></td>
-            <td>true</td>
+            <td><a href="/edit" class="tool"><span class="glyphicon glyphicon-pencil"> </span></a>
+                <a href="/remove" class="tool"><span class="glyphicon glyphicon-remove"> </span></a></td>
         </tr>
         <tr>
             <td><a href="#">Closes the modal when escape key is pressed</a></td>
@@ -72,7 +83,8 @@
                          aria-valuenow="4" aria-valuemin="0" aria-valuemax="100">
 
                     </div>
-                </div></td>
+                </div>
+            </td>
             <td><code class="alert-danger">Отменен</code></td>
             <td>true</td>
         </tr>
@@ -86,7 +98,8 @@
                          aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
 
                     </div>
-                </div></td>
+                </div>
+            </td>
             <td><code class="alert-success">Завершен</code></td>
             <td>true</td>
         </tr>

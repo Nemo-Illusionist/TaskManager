@@ -140,3 +140,18 @@ body {
     text-decoration: none;
     display: block;
 }
+.table tbody a.tool {
+    display: inline;
+}
+.btn-primary {
+    background-color: #303030;
+    border-color: #222;
+}
+.btn-primary:hover {
+    background-color: #222;
+    border-color: #444;
+}
+.alert.alert-dismissible {
+    background-color: transparent;
+    border: none;
+}
