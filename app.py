@@ -18,14 +18,18 @@ def hash(salt, password):
 
 
 def getSession():
-    return 123#request.cookies.get('session_key')
+    return 123  # request.cookies.get('session_key')
+
+
+def render(rend):
+    if getSession() is None:
+        return redirect('/login', 301)
+    return rend
 
 
 @app.route('/')
 def index():
-    if getSession() is None:
-        return redirect('/login', 301)
-    return redirect('/projects', 301)
+    return render(redirect('/projects', 301))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -45,17 +49,13 @@ def login():
 @app.route('/projects', methods=['GET', 'POST'])
 def projects():
     if request.method == 'GET':
-        if getSession() is None:
-            return redirect('login.html', 301)
-        return render_template('projects.html')
+        return render(render_template('projects.html'))
 
 
 @app.route('/task', methods=['GET', 'POST'])
 def task():
     if request.method == 'GET':
-        if getSession() is None:
-            return redirect('login.html', 301)
-        return render_template('tasks.html')
+        return render(render_template('tasks.html'))
 
 
 if __name__ == '__main__':
