@@ -17,18 +17,12 @@ class Project(db.Entity):
     Id = PrimaryKey(int, auto=True)
     UserId = Required(int)
     ProjectName = Required(str)
+    Text = Required(str)
     Status = Required(str, default="Новый")
     URL = Required(str)
     StartData = Required(datetime)
     EndData = Optional(datetime)
     ExpectedDate = Optional(datetime)
-
-
-class ProjectInfo(db.Entity):
-    _table_ = "ProjectInfo"
-    Id = PrimaryKey(int, auto=True)
-    ProjectId = Required(int, unique=True)
-    Text = Required(str)
 
 
 class Task(db.Entity):
@@ -68,6 +62,13 @@ class UserUrl(db.Entity):
     UserId = Required(int)
     Comment = Required(str)
     Url = Required(str)
+
+
+class Sessions(db.Entity):
+    _table_ = "Sessions"
+    Id = PrimaryKey(int, auto=True)
+    UserId = Required(int)
+    Active = Required(bool, default=True)
 
 
 # endregion
@@ -120,6 +121,9 @@ def deleteUserUrl(id):
 
 # endregion
 
+@db_session
+def getSessionsId(sessionsId):
+    return select(r for r in Sessions if r.Id == sessionsId and r.Active).first().UserId
 
 # region ProjectDB
 @db_session
@@ -140,4 +144,5 @@ def addProject(userId, name, url, status, expected, info):
 @db_session
 def getProject(userId):
     return select(r for r in ParticipantsProject if r.UserId == userId).get()
+
 # endregion
