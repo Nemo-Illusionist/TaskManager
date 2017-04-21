@@ -1,0 +1,135 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="masthead clearfix">
+        <div class="inner">
+            <h3 class="masthead-brand">Планировщик заданий</h3>
+            <nav class="nav nav-masthead">
+                <a class="nav-link active" href="/">Домой</a>
+                <a class="nav-link" href="/structure">Куда-то еще</a>
+                <a class="nav-link" href="#">Помощь</a>
+            </nav>
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Задание</th>
+            <th style="width: 100px;">Пользователь</th>
+            <th style="width: 165px;">Ожидаемая дата</th>
+            <th style="width: 50px;">Приоритет</th>
+            <th style="width: 50px;">Статус</th>
+            <th style="width: 50px;">Ред.</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><a href="/structure">Includes a modal-backdrop element. Alternatively, specify static for a backdrop which
+                doesn't close the modal on click.</a>
+            </td>
+            <td>backdrop</td>
+            <td>Apr 25, 2017</td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 66%"
+                         aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">
+
+                    </div>
+                </div>
+            </td>
+            <td><code class="alert-info">В&nbsp;процессе</code></td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td><a href="#">Closes the modal when escape key is pressed</a></td>
+            <td>keyboard</td>
+            <td>Apr 11, 2017</td>
+            <td>backdrop</td>
+            <td><code class="alert-success">Завершен</code></td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td><a href="#">Puts the focus on the modal when initialized.</a></td>
+            <td>focus</td>
+            <td>Dec 31, 2017</td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 98%"
+                         aria-valuenow="98" aria-valuemin="0" aria-valuemax="100">
+
+                    </div>
+                </div>
+            </td>
+            <td><code class="alert-warning">Новый</code></td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td><a href="#">Puts the focus on the modal when initialized.</a></td>
+            <td>focus</td>
+            <td>Oct 31, 2017</td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 4%"
+                         aria-valuenow="4" aria-valuemin="0" aria-valuemax="100">
+
+                    </div>
+                </div></td>
+            <td><code class="alert-danger">Отменен</code></td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td><a href="#">Puts the focus on the modal when initialized.</a></td>
+            <td>focus</td>
+            <td>Feb 23, 2017</td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 50%"
+                         aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+
+                    </div>
+                </div></td>
+            <td><code class="alert-success">Завершен</code></td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td><a href="#">Puts the focus on the modal when initialized.</a></td>
+            <td>focus</td>
+            <td>Aug 14, 2017</td>
+            <td>backdrop</td>
+            <td><code class="alert-warning">Новый</code></td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td><a href="#">Puts the focus on the modal when initialized.</a></td>
+            <td>focus</td>
+            <td>May 11, 2017</td>
+            <td>backdrop</td>
+            <td><code class="alert-info">В&nbsp;процессе</code></td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td><a href="#">Puts the focus on the modal when initialized.</a></td>
+            <td>focus</td>
+            <td>Apr 25, 2017</td>
+            <td>backdrop</td>
+            <td><code class="alert-success">Завершен</code></td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td><a href="#">Puts the focus on the modal when initialized.</a></td>
+            <td>focus</td>
+            <td>Jun 01, 2017</td>
+            <td>backdrop</td>
+            <td><code class="alert-info">В&nbsp;процессе</code></td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td><a href="#">Shows the modal when initialized.</a></td>
+            <td>show</td>
+            <td>Mar 20, 2017</td>
+            <td>backdrop</td>
+            <td><code class="alert-warning">Новый</code></td>
+            <td>true</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}
