@@ -32,6 +32,12 @@ def index():
     return render(redirect('/projects', 301))
 
 
+@app.route('/registration', methods=['GET', 'POST'])
+def registration():
+    if request.method == 'GET':
+        return render(render_template('registration.html'))
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -52,8 +58,8 @@ def projects():
         return render(render_template('projects.html'))
 
 
-@app.route('/task', methods=['GET', 'POST'])
-def task():
+@app.route('/tasks', methods=['GET', 'POST'])
+def tasks():
     if request.method == 'GET':
         return render(render_template('tasks.html'))
 
