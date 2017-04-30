@@ -80,11 +80,11 @@ db.generate_mapping(create_tables=True)
 
 # region UserDB
 @db_session
-def addUser(login, pass_hash, salt):
+def addUser(login, pass_hash, salt, email, phone, name):
     User(Login=login, PassHash=pass_hash, Salt=salt)
     commit()
     id = select(r for r in User if r.Login == login).first().Id
-    UserInfo(UserId=id, Email=None, Phone=None, Name=None)
+    UserInfo(UserId=id, Email=email, Phone=phone, Name=name)
     commit()
 
 

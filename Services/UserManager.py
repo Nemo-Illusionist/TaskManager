@@ -16,12 +16,11 @@ def Authorization(Login, Pass):
     return None
 
 
-def Registration(Login, Pass):
+def Registration(Login, Pass, email, phone, name):
     salt = sha512(str(uuid4()).encode('utf-8')).hexdigest()
     passHash = hash(salt, Pass)
     try:
-        addUser(Login, passHash, salt)
+        addUser(Login, passHash, salt, email, phone, name)
     except CommitException:
-        return None
-    userId = getUser(Login).Id
-    return RegistrationSession(userId)
+        return True
+    return False
