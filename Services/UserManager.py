@@ -1,15 +1,10 @@
+from Services.SessionManager import RegistrationSession
 from Services.dbManager import *
 from hashlib import sha512
 
 
 def getHash(salt, password):
     return sha512((salt + password).encode('utf-8')).hexdigest()
-
-
-def RegistrationSession(userId):
-    id = uuid4()
-    addSession(id, userId)
-    return id
 
 
 def Authorization(Login, Pass):
