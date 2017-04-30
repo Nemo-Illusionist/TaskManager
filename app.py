@@ -13,10 +13,6 @@ def auth(login, password):
     return True
 
 
-def hash(salt, password):
-    return sha512((salt + password).encode('utf-8')).hexdigest()
-
-
 def getSession():
     return 123  # request.cookies.get('session_key')
 

@@ -1,3 +1,4 @@
+from uuid import UUID, uuid4
 from pony.orm import *
 from datetime import datetime
 
@@ -66,7 +67,7 @@ class UserUrl(db.Entity):
 
 class Sessions(db.Entity):
     _table_ = "Sessions"
-    Id = PrimaryKey(int, auto=True)
+    Id = PrimaryKey(UUID)
     UserId = Required(int)
     Active = Required(bool, default=True)
 
@@ -79,11 +80,11 @@ db.generate_mapping(create_tables=True)
 
 # region UserDB
 @db_session
-def addUser(login, pass_hash, salt, email, phone, name):
+def addUser(login, pass_hash, salt):
     User(Login=login, PassHash=pass_hash, Salt=salt)
     commit()
     id = select(r for r in User if r.Login == login).first().Id
-    UserInfo(UserId=id, Email=email, Phone=phone, Name=name)
+    UserInfo(UserId=id, Email=None, Phone=None, Name=None)
     commit()
 
 
@@ -122,8 +123,13 @@ def deleteUserUrl(id):
 # endregion
 
 @db_session
-def getSessionsId(sessionsId):
+def getSessionsUserId(sessionsId):
     return select(r for r in Sessions if r.Id == sessionsId and r.Active).first().UserId
+
+@db_session
+def addSession(sessionId, userId):
+    Sessions(Id=sessionId, UserId=userId)
+    commit()
 
 # region ProjectDB
 @db_session
@@ -133,11 +139,10 @@ def addProject(userId, name, url, status, expected, info):
         p.Status = status
     if expected is not None:
         p.ExpectedDate = expected
-    commit()
-    id = p.Id
     if info is not None:
-        ProjectInfo(ProjectId=id, Text=info)
-    ParticipantsProject(UserId=userId, ProjectId=id)
+        p.Text = info
+    commit()
+    ParticipantsProject(UserId=userId, ProjectId=p.Id)
     commit()
 
 
