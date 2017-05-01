@@ -67,7 +67,7 @@ class UserUrl(db.Entity):
 
 class Sessions(db.Entity):
     _table_ = "Sessions"
-    Id = PrimaryKey(UUID)
+    Id = PrimaryKey(str)
     UserId = Required(int)
     Active = Required(bool, default=True)
 
@@ -123,13 +123,15 @@ def deleteUserUrl(id):
 # endregion
 
 @db_session
-def getSessionsUserId(sessionsId):
-    return select(r for r in Sessions if r.Id == sessionsId and r.Active).first().UserId
+def getSessions(sessionsId):
+    return select(r for r in Sessions if r.Id == sessionsId and r.Active).first()
+
 
 @db_session
 def addSession(sessionId, userId):
     Sessions(Id=sessionId, UserId=userId)
     commit()
+
 
 # region ProjectDB
 @db_session

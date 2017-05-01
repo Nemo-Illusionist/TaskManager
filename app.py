@@ -1,9 +1,6 @@
-from flask import Flask, render_template, request, jsonify, escape, redirect, abort, url_for, make_response
-from pony.orm import *
-from datetime import datetime
-from hashlib import sha512
-from uuid import uuid4
-from urllib.parse import quote
+from flask import Flask, render_template, request, redirect, jsonify
+
+from Services.UserManager import Authorization
 
 app = Flask(__name__)
 app.debug = True

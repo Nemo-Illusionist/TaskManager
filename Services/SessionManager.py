@@ -1,8 +1,15 @@
 from uuid import uuid4
-from Services.dbManager import addSession
+from Services.dbManager import addSession, getSessions
 
 
 def RegistrationSession(userId):
-    uuid = uuid4()
-    addSession(uuid, userId)
-    return uuid
+    struuid = str(uuid4())
+    addSession(struuid, userId)
+    return struuid
+
+
+def ValidationSession(sessionId):
+    session = getSessions(sessionId)
+    if session is None:
+        return None
+    return session.UserId

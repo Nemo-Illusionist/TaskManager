@@ -24,3 +24,9 @@ def Registration(Login, Pass, email, phone, name):
     except CommitException:
         return True
     return False
+
+def GetUserInfo(Login):
+    user = getUser(Login)
+    if user is None:
+        return None
+    return [getUserInfo(user.Id), getUserUrl(user.Id)]
