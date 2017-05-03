@@ -41,7 +41,7 @@ def GetUserInfo(Login) -> [UserInfoEntity, List[UserUrlEntity]]:
     user = getUser(Login)
     if user is None:
         return None
-    return [getUserInfo(user.Id), getUserUrl(user.Id)]
+    return getUserInfo(user.Id), getUserUrl(user.Id)
 
 
 def GetAllUser() -> List[User]:
