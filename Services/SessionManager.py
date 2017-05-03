@@ -1,5 +1,5 @@
 from uuid import uuid4
-from Services.dbManager import addSession, getSessions
+from Services.dbManager import addSession, getSessions, disabledSession
 
 
 def RegistrationSession(userId):
@@ -13,3 +13,7 @@ def ValidationSession(sessionId):
     if session is None:
         return None
     return session.UserId
+
+
+def DisabledSession(sessionId):
+    disabledSession(sessionId)
