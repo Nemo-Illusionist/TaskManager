@@ -6,13 +6,6 @@ db = Database()
 
 
 # region Entity
-class ParticipantsProjectEntity(db.Entity):
-    _table_ = "ParticipantsProject"
-    Id = PrimaryKey(int, auto=True)
-    UserId = Required(int)
-    ProjectId = Required(int)
-
-
 class ProjectEntity(db.Entity):
     _table_ = "Project"
     Id = PrimaryKey(int, auto=True)
@@ -145,14 +138,34 @@ def addProject(userId, name, url, status, expected, info):
     if expected is not None:
         p.ExpectedDate = expected
     commit()
-    ParticipantsProjectEntity(UserId=userId, ProjectId=p.Id)
-    commit()
 
 
 @db_session
-def getProject(userId):
-    ProjectsId = select(r for r in ParticipantsProjectEntity
-                        if r.UserId == userId).get()
-    return
+def getMyProject(userId) -> List[ProjectEntity]:
+    psid = list(set(r.ProjectId for r in getMyTask(userId)))
+    return select(r for r in ProjectEntity for p in psid if p == r.Id).get()
+
+
+@db_session
+def getAllProject() -> List[ProjectEntity]:
+    return ProjectEntity.get()
+
+
+@db_session
+def getMyTask(userId) -> List[TaskEntity]:
+    return select(r for r in TaskEntity if r.UserId == userId).get()
+
+
+@db_session
+def getTask(projectId) -> List[TaskEntity]:
+    return select(r for r in TaskEntity if r.ProjectId == projectId).get()
+
+
+def addTask(projectId, userId, name, comment, priority, expected):
+    t = TaskEntity(ProjectId=projectId, UserId=userId, StartData=datetime.now(),
+                   TaskName=name, Comment=comment, Priority=priority)
+    if expected is not None:
+        t.ExpectedDate = expected
+    commit()
 
 # endregion
